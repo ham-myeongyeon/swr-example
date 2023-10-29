@@ -19,7 +19,8 @@
     "noEmitOnError": true,
     "downlevelIteration": true,
     "paths": {
-      "swr": ["./core/src/index.ts"]
+      "swr": ["./core/src/index.ts"],
+      "internal": ["./internal/src/index.ts"]
     },
     "incremental": true
   },
