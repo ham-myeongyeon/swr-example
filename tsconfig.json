@@ -20,7 +20,7 @@
     "downlevelIteration": true,
     "paths": {
       "swr": ["./core/src/index.ts"],
-      "internal": ["./internal/src/index.ts"]
+      "internal": ["./internal/index.ts"]
     },
     "incremental": true
   },
