@@ -1,6 +1,8 @@
 import { SWRGlobalState } from "internal";
+import type { Config } from "internal/types";
+import { Key, Fetcher } from "./types";
 
-export const useSWRHandler = (key, fetcher, config) => {
+export const useSWRHandler = (key: Key, fetcher: Fetcher, config: Config) => {
   const { cache } = config;
   const { state } = SWRGlobalState.get(cache);
 
