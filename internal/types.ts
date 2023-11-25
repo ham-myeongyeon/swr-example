@@ -20,3 +20,9 @@ export interface State {
   isValidating: isValidating;
   error: Error;
 }
+
+export type GlobalState = {
+  REVALIDATORS: Record<string, () => void>;
+  MUTATION: Record<string, [number, number]>;
+  FETCHER: Record<string, [Data, number]>;
+};
