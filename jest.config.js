@@ -3,7 +3,7 @@ module.exports = {
   testRegex: "/test/.*\\.test\\.tsx?$",
   testPathIgnorePatterns: ["/node_modules/", "/e2e/"],
   modulePathIgnorePatterns: ["<rootDir>/examples/"],
-  setupFilesAfterEnv: ["<rootDir>/test/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/test/jest-setup.js"],
   moduleNameMapper: {
     "^swr$": "<rootDir>/core/src/index.ts",
     "^swr/infinite$": "<rootDir>/infinite/src/index.ts",
