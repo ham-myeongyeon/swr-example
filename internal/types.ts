@@ -12,7 +12,7 @@ export interface Cache<Data = any> {
 type Data = Record<string, any>;
 type isLoading = boolean;
 type isValidating = boolean;
-type Error = Record<string | number, any>;
+type Error = unknown;
 
 export interface State {
   data: Data;
