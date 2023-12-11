@@ -7,7 +7,8 @@ export const stableHash = (arg: any): string => {
   if (table.get(arg)) return table.get(arg);
 
   if (
-    //Object(arg)에서 객체인경우 객체를 그대로 반환하며, 원시형 데이터는 원시형 데이터에 객체를 감싸서 반환한다.
+    // Object(arg)에서 객체인경우 객체를 그대로 반환하며,
+    // 원시형 데이터는 원시형 데이터에 객체를 감싸서 반환한다.
     // 객체이면서 Date, RegExp가 아닌 경우
     Object(arg) === arg &&
     arg.constructor !== Date &&
