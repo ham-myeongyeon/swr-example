@@ -8,8 +8,7 @@ export const createCacheHelper = (
   getCache: () => State;
   setCache: (value: State) => void;
 } => {
-  const globalState = SWRGlobalState.get(cache);
-  const { setter } = globalState;
+  const { setter } = SWRGlobalState.get(cache);
 
   return {
     getCache: () => cache.get(key) || {},
