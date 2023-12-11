@@ -1,6 +1,5 @@
 import { Key } from "../types";
-import { isFunction } from "./shared";
-import { stableHash } from "./stableHash";
+import { isFunction, stableHash } from "internal";
 
 export const serialize = (key: Key): [string, Key] => {
   if (isFunction(key)) {
