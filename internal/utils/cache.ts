@@ -35,8 +35,12 @@ const initProvider = (cache: Cache) => {
 export const initCache = (provider: Cache, config?: Config) => {
   if (!SWRGlobalState.get(provider)) {
     initProvider(provider);
-    return [provider];
+    const unmount = () => {
+      SWRGlobalState.delete(provider);
+    };
+
+    return { provider, initProvider, unmount };
   }
 
-  return [provider];
+  return { provider };
 };
