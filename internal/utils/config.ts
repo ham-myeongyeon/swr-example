@@ -6,7 +6,7 @@ const compare = (currentData: any, newData: any) =>
   stableHash(currentData) == stableHash(newData);
 ``;
 
-const [cache] = initCache(new Map());
+const { provider } = initCache(new Map());
 
 export const defaultConfig = {
   // events
@@ -31,7 +31,7 @@ export const defaultConfig = {
   // providers
   compare,
   isPaused: () => false,
-  cache,
+  cache: provider,
   // mutate,
   fallback: {},
 };
