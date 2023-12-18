@@ -5,3 +5,5 @@ export const isFunction = <
 ): v is T => {
   return typeof v === "function";
 };
+
+export const mergeObjects = (a: any, b?: any) => ({ ...a, ...b });
