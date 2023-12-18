@@ -4,3 +4,4 @@ export { getTimeStamp } from "./utils/getTimeStamp";
 export { isFunction } from "./utils/shared";
 export { stableHash } from "./utils/stableHash";
 export { initCache } from "./utils/cache";
+export { useSWRConfig } from "./utils/use-swr-config";
