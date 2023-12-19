@@ -8,7 +8,7 @@ export const createCacheHelper = (
   getCache: () => State;
   setCache: (value: State) => void;
 } => {
-  const { setter } = SWRGlobalState.get(cache);
+  const { SETTER } = SWRGlobalState.get(cache);
 
   return {
     getCache: () => cache.get(key) || {},
@@ -18,7 +18,7 @@ export const createCacheHelper = (
       const prev = cache.get(key);
       const merge = { ...prev, ...value };
 
-      setter(key, merge, prev);
+      SETTER(key, merge, prev);
     },
   };
 };

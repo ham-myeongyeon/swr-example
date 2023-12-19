@@ -27,8 +27,9 @@ const initProvider = (cache: Cache) => {
   };
 
   SWRGlobalState.set(cache, {
-    setter,
-    subscribe,
+    FETCHER: {},
+    SETTER: setter,
+    SUBSCRIBE: subscribe,
   });
 };
 
