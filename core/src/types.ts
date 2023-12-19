@@ -1,2 +1,4 @@
-export type Key = string | number | Array<any> | Record<string, any>;
+import { Arguments } from "internal/types";
+
+export type Key = Arguments;
 export type Fetcher = (arg: any) => void;

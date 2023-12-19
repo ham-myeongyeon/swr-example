@@ -2,6 +2,8 @@ export interface Config {
   cache: Cache;
 }
 
+export type Arguments = string | Record<any, any> | null | undefined | false;
+
 export interface Cache<Data = any> {
   get(key: string): Data | undefined;
   set(key: string, value: Data): void;
