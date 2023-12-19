@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useRef } from "react";
-import { SWRGlobalState, useSWRConfig } from "internal";
+import { SWRGlobalState, createCacheHelper, useSWRConfig } from "internal";
 import type { Config } from "internal/types";
 import { Key, Fetcher } from "./types";
 import { revalidate } from "./utils/revalidate";
@@ -20,14 +20,14 @@ const withArgs = (hook: any) => {
 export const useSWRHandler = (_key: Key, fetcher: Fetcher, config: Config) => {
   const { cache } = config;
   const [key, fnArg] = serialize(_key);
-  const { state } = SWRGlobalState.get(cache);
   const fetcherRef = useRef<Fetcher>(fetcher);
+  const { getCache } = createCacheHelper(cache, key);
 
-  const { data, isLoading, isValidating, error } = state;
+  const { data, isLoading, isValidating, error } = getCache();
 
   const memoizedRevalidate = useCallback(() => {
-    return revalidate(fnArg, fetcherRef.current);
-  }, [key, cache]);
+    return revalidate(cache, fnArg, fetcherRef.current);
+  }, [fnArg, fetcherRef?.current, cache]);
 
   useEffect(() => {
     memoizedRevalidate();
