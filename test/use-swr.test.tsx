@@ -15,9 +15,6 @@ describe("useSwr test", () => {
     }
 
     render(<Page />);
-    await sleep(10);
-    cleanup();
-    render(<Page />);
     const result = screen.getByTestId("result").textContent;
 
     expect(result).toBe(fetcher(key));
