@@ -1,10 +1,11 @@
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useRef, useSyncExternalStore } from "react";
 import { SWRGlobalState, createCacheHelper, useSWRConfig } from "internal";
-import type { Config } from "internal/types";
+import type { Config, State } from "internal/types";
 import { Key, Fetcher } from "./types";
 import { revalidate } from "./utils/revalidate";
 import { serialize } from "./utils/serialize";
 import { mergeObjects } from "internal/utils/shared";
+import { isEqual } from "lodash";
 
 const withArgs = (hook: any) => {
   return function useSWRArgs(...args: any) {
@@ -21,9 +22,18 @@ export const useSWRHandler = (_key: Key, fetcher: Fetcher, config: Config) => {
   const { cache } = config;
   const [key, fnArg] = serialize(_key);
   const fetcherRef = useRef<Fetcher>(fetcher);
-  const { getCache } = createCacheHelper(cache, key);
+  const { getCache, subscribeCache } = createCacheHelper(cache, key);
 
-  const { data, isLoading, isValidating, error } = getCache();
+  const cached = useSyncExternalStore<State>(
+    (callback: () => void) => () => {
+      subscribeCache(key, (current: State, prev: State) => {
+        if (!isEqual(current, prev)) {
+          callback();
+        }
+      });
+    },
+    () => getCache()
+  );
 
   const memoizedRevalidate = useCallback(() => {
     return revalidate(cache, fnArg, fetcherRef.current);
@@ -32,6 +42,8 @@ export const useSWRHandler = (_key: Key, fetcher: Fetcher, config: Config) => {
   useEffect(() => {
     memoizedRevalidate();
   }, []);
+
+  const { data, isLoading, isValidating, error } = cached;
 
   return {
     data,

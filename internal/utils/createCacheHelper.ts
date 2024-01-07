@@ -7,8 +7,12 @@ export const createCacheHelper = (
 ): {
   getCache: () => State;
   setCache: (value: State) => void;
+  subscribeCache: (
+    key: string,
+    callback: (current: any, prev: any) => void
+  ) => (current: any, prev: any) => void;
 } => {
-  const { SETTER } = SWRGlobalState.get(cache);
+  const { SETTER, SUBSCRIBE } = SWRGlobalState.get(cache);
 
   return {
     getCache: () => cache.get(key) || {},
@@ -20,5 +24,6 @@ export const createCacheHelper = (
 
       SETTER(key, merge, prev);
     },
+    subscribeCache: SUBSCRIBE,
   };
 };
